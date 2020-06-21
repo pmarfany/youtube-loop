@@ -1,21 +1,19 @@
-import React, {useState} from 'react';
+import React from 'react';
 import 'reset-css';
+import {useQuery} from './hooks/useQuery';
+import {getLinkFromId, ID_PARAM} from './utils/youtube';
 import {YoutubePlayer} from './componenets/YoutubePlayer/YoutubePlayer';
 import {YoutubeSearchInput} from './componenets/YoutubeSearchInput/YoutubeSearchInput';
 
 const App: React.FC = () => {
-  const [videoId, setVideoId] = useState<string>();
-
-  // TODO: UseEffect to read value from url query param
-  // TODO: Also read value from input && validate/generate url with utils
-  // useEffect(, []);
+  const [videoId, setVideoId] = useQuery(ID_PARAM);
 
   return (
     <>
       <h1>Youtube Loop</h1>
 
-      <YoutubeSearchInput value="" onSubmit={console.log}/>
-      <YoutubePlayer videoUrl="https://www.youtube.com/watch?v=rvAVV4nIxlY" />
+      <YoutubeSearchInput value={videoId} onSubmit={setVideoId}/>
+      <YoutubePlayer videoUrl={getLinkFromId(videoId)} />
     </>
   );
 };

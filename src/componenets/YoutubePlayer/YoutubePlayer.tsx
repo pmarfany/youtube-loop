@@ -1,5 +1,6 @@
 import React, {useCallback, useRef} from 'react';
 import ReactPlayer from 'react-player/youtube';
+import {isValidLink} from '../../utils/youtube';
 
 type YoutubePlayerProps = {
   videoUrl: string;
@@ -8,13 +9,15 @@ type YoutubePlayerProps = {
 const YoutubePlayer: React.FC<YoutubePlayerProps> = ({ videoUrl }) => {
   const videoRef = useRef<ReactPlayer>(null);
 
-  const onEnded = useCallback(() => {
+  const onEnded = () => {
     if ( videoRef.current === null ) { return; }
     const internalPlayer: any = videoRef.current.getInternalPlayer();
 
     if ( !internalPlayer.playVideo ) { return console.error('Youtube API not loaded!'); }
     internalPlayer.playVideo();
-  }, [videoRef.current]);
+  };
+
+  if ( !isValidLink(videoUrl) ) { return null; }
 
   return (
     <ReactPlayer

@@ -1,5 +1,4 @@
 import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
-import {isValidLink} from '../../utils/youtube';
 
 interface SearchInputProps {
   value: string;
@@ -8,17 +7,13 @@ interface SearchInputProps {
 
 const YoutubeSearchInput: React.FC<SearchInputProps> = ({ value, onSubmit }) => {
   const [inputValue, setInputValue] = useState(value);
-  const isValid = isValidLink(inputValue);
 
   // Could remove this if we used a 'key' outside
   useEffect(() => setInputValue(value), [value]);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => setInputValue(e.currentTarget.value);
 
-  const submitValue = () => {
-    if ( !isValid ) { return; }
-    onSubmit(inputValue);
-  };
+  const submitValue = () => onSubmit(inputValue);
 
   const onKeyDown = (e: KeyboardEvent) => {
     if ( e.key !== 'Enter' ) { return; }
@@ -26,8 +21,15 @@ const YoutubeSearchInput: React.FC<SearchInputProps> = ({ value, onSubmit }) => 
   };
 
   return (
-    <div className={`input-wrapper input-search ${!isValid ? 'input-error' : ''}`}>
-      <input type="search" className="input-element" value={inputValue} onChange={onChange} onKeyDown={onKeyDown} />
+    <div className="input-wrapper input-search">
+      <input
+        type="search"
+        placeholder="Insert youtube videoId (?v=)"
+        className="input-element"
+        value={inputValue}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+      />
       <button className="search-button" onClick={submitValue}>Search</button>
     </div>
   );

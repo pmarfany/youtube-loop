@@ -25,10 +25,4 @@ function getLinkFromId(videoId: string): string {
   return `https://www.${HOSTNAME}.com${PATHNAME}?${ID_PARAM}=${videoId}`;
 }
 
-function getIdFromLink(link: string): string {
-  if ( !isValidLink(link) ) { throw new Error('Youtube link is invalid'); }
-
-  return new URL(link).searchParams.get(ID_PARAM) as string;
-}
-
-export { isValidLink, getLinkFromId, getIdFromLink };
+export { ID_PARAM, isValidLink, getLinkFromId };
