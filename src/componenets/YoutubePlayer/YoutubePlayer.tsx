@@ -1,35 +1,18 @@
-import React, {useRef} from 'react';
-import ReactPlayer from 'react-player/youtube';
-import {isValidLink} from '../../utils/youtube';
+import React from 'react';
+import YouTube, {Options} from 'react-youtube';
 
 type YoutubePlayerProps = {
-  videoUrl: string;
+  videoId: string;
 }
 
-const YoutubePlayer: React.FC<YoutubePlayerProps> = ({ videoUrl }) => {
-  const videoRef = useRef<ReactPlayer>(null);
+const PLAYER_OPTS: Options = { height: '100%', width: '100%' };
 
-  const onEnded = () => {
-    if ( videoRef.current === null ) { return; }
-    const internalPlayer: any = videoRef.current.getInternalPlayer();
-
-    if ( !internalPlayer.playVideo ) { return console.error('Youtube API not loaded!'); }
-    internalPlayer.playVideo();
-  };
-
-  if ( !isValidLink(videoUrl) ) { return null; }
-
-  return (
-    <ReactPlayer
-      url={videoUrl}
-      controls={true}
-      pip={true}
-      width="100%"
-      height="100%"
-      ref={videoRef}
-      onEnded={onEnded}
-    />
-  );
-};
+const YoutubePlayer: React.FC<YoutubePlayerProps> = ({ videoId }) => (
+  <YouTube
+    videoId={videoId}
+    onEnd={({ target }) => target.playVideo()}
+    opts={PLAYER_OPTS}
+  />
+);
 
 export { YoutubePlayer };
