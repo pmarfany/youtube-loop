@@ -8,7 +8,7 @@ function useQuery(key: string): UseQuery {
 
   return [
     new URLSearchParams(location.search).get(key) ?? '',
-    (value: string) => history.replace(`/?${key}=${value}`),
+    (value: string) => history.push(`/?${key}=${value}`),
   ];
 }
 
