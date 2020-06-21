@@ -1,21 +1,20 @@
-import React, {useEffect, useRef} from 'react';
-// TODO: Replace with react-player/youtube for optimized import
-import ReactPlayer from 'react-player';
+import React, {useCallback, useRef} from 'react';
+import ReactPlayer from 'react-player/youtube';
 
 type YoutubePlayerProps = {
   videoUrl: string;
-  className?: string;
 }
 
-const YoutubePlayer: React.FC<YoutubePlayerProps> = ({ videoUrl, className }) => {
+const YoutubePlayer: React.FC<YoutubePlayerProps> = ({ videoUrl }) => {
   const videoRef = useRef<ReactPlayer>(null);
 
-  useEffect(() => {
+  const onEnded = useCallback(() => {
     if ( videoRef.current === null ) { return; }
-    console.log(videoRef.current);
-    // @ts-ignore
-    window.player = videoRef.current;
-  }, [videoRef]);
+    const internalPlayer: any = videoRef.current.getInternalPlayer();
+
+    if ( !internalPlayer.playVideo ) { return console.error('Youtube API not loaded!'); }
+    internalPlayer.playVideo();
+  }, [videoRef.current]);
 
   return (
     <ReactPlayer
@@ -25,15 +24,9 @@ const YoutubePlayer: React.FC<YoutubePlayerProps> = ({ videoUrl, className }) =>
       width="100%"
       height="100%"
       ref={videoRef}
-      onReady={console.log}
-      onPause={console.log}
-      onEnded={(...params: any) => console.log('onEnd', ...params)}
+      onEnded={onEnded}
     />
   );
-};
-
-YoutubePlayer.defaultProps = {
-  className: '',
 };
 
 export { YoutubePlayer };
