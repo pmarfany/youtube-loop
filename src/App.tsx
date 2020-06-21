@@ -6,6 +6,7 @@ const App: React.FC = () => {
   const [videoId, setVideoId] = useState<string>();
 
   // TODO: UseEffect to read value from url query param
+  // TODO: Also read value from input && validate/generate url with utils
   // useEffect(, []);
 
   return (
