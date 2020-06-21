@@ -1,4 +1,4 @@
-import React, {useCallback, useRef} from 'react';
+import React, {useRef} from 'react';
 import ReactPlayer from 'react-player/youtube';
 import {isValidLink} from '../../utils/youtube';
 

@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
 interface SearchInputProps {
   value: string;
@@ -7,9 +7,6 @@ interface SearchInputProps {
 
 const YoutubeSearchInput: React.FC<SearchInputProps> = ({ value, onSubmit }) => {
   const [inputValue, setInputValue] = useState(value);
-
-  // Could remove this if we used a 'key' outside
-  useEffect(() => setInputValue(value), [value]);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => setInputValue(e.currentTarget.value);
 

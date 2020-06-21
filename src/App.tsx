@@ -12,7 +12,7 @@ const App: React.FC = () => {
     <>
       <h1>Youtube Loop</h1>
 
-      <YoutubeSearchInput value={videoId} onSubmit={setVideoId}/>
+      <YoutubeSearchInput value={videoId} onSubmit={setVideoId} key={videoId} />
       <YoutubePlayer videoUrl={getLinkFromId(videoId)} />
     </>
   );
