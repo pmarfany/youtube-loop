@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import 'reset-css';
 import {YoutubePlayer} from './componenets/YoutubePlayer/YoutubePlayer';
+import {YoutubeSearchInput} from './componenets/YoutubeSearchInput/YoutubeSearchInput';
 
 const App: React.FC = () => {
   const [videoId, setVideoId] = useState<string>();
@@ -13,7 +14,7 @@ const App: React.FC = () => {
     <>
       <h1>Youtube Loop</h1>
 
-      {/*<SearchInput />*/}
+      <YoutubeSearchInput value="" onSubmit={console.log}/>
       <YoutubePlayer videoUrl="https://www.youtube.com/watch?v=rvAVV4nIxlY" />
     </>
   );
