@@ -1,6 +1,6 @@
 # Youtube Loop
 
-Simple react page that allows the user to enter a youtube videoID and initiates a video loop.
+Simple react page that initiates a video loop given a youtube videoID.
 
 An online version of this project can be found [here](https://pmarfany.github.io/youtube-loop).
 
