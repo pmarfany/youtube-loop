@@ -1,0 +1,17 @@
+.input-wrapper > * {
+  flex-shrink: 0;
+  border: 0;
+  padding: var(--md) var(--lg);
+  height: 30px;
+}
+
+.input-element {
+  flex-grow: 1;
+  --webkit-appearance: none;
+           appearance: none;
+}
+
+.search-button {
+  background-color: var(--youtube);
+  color: var(--accentText);
+}

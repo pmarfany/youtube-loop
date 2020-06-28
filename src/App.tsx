@@ -11,8 +11,12 @@ const App: React.FC = () => {
   return (
     <>
       <h1 className="mb-xxl text-center">Youtube Loop</h1>
-
-      <YoutubeSearchInput value={videoId} onSubmit={setVideoId} key={videoId} />
+      <YoutubeSearchInput
+        key={videoId}
+        value={videoId}
+        onSubmit={setVideoId}
+        className="mb-xxl"
+      />
       <YoutubePlayer videoId={videoId} />
     </>
   );
